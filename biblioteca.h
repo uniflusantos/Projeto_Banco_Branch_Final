@@ -17,4 +17,7 @@ int buscar_cpf(long cpf, struct contas*t, int cont);
 
 
 void limpa_buffer();
+
+void le_informacoes(struct contas *armazena, int cont);
+
 #endif //UNTITLED19_BIBLIOTECA_H
