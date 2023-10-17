@@ -13,4 +13,5 @@ struct contas{
     char senha[100];
 };
 
+int buscar_cpf(long cpf, struct contas*t, int cont);
 #endif //UNTITLED19_BIBLIOTECA_H
