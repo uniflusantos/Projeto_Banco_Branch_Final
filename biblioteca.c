@@ -124,3 +124,66 @@ void listar_contas(int cont, struct contas *t){
 }
 
 
+void debitar(int cont, struct contas *t) {
+    long cpf;
+    int aux;
+    if (cont == 0) {
+        printf("Nao existem contas cadastradas ainda.\n");
+    }
+    else {
+
+        printf("Entre com o CPF que voce deseja debitar um saldo: ");
+        scanf("%ld", &cpf);
+        printf("\n");
+        aux = buscar_cpf(cpf, t, cont);
+        //printf(" posicao: %d\n",aux); (debug)
+        if (aux == -1) {
+            printf("CPF nao registrado.\n\n");
+            limpa_buffer();
+        } else {
+            char senha_[200];
+            printf("Digite a senha: ");
+            scanf("%s", senha_);
+            int r = strcmp(senha_, t[aux].senha);
+            if (r == 0) {
+                double valor;
+                printf("Digite o valor que voce deseja debitar: ");
+                scanf("%lf", &valor);
+                //printf("posicao: %d\n", aux);
+                if (t[aux].tipo_conta == 1 && t[aux].valor_inicial - valor - (0.05 * valor) < -1000) {
+                    printf("Sua conta nao possui saldo suficiente para realizar esse debito.\n\n");
+                    limpa_buffer();
+                }
+                else if (t[aux].tipo_conta == 1 && t[aux].valor_inicial - valor - (0.05 * valor) > -1000) {
+                    t[aux].valor_inicial = t[aux].valor_inicial - valor - (0.05 * valor);
+                    printf("Valor debitado com sucesso!\n\n");
+                    t[aux].lista[t[aux].operacoes].tipo = 1;
+                    t[aux].lista[t[aux].operacoes].cpf_origem = t[aux].cpf;
+                    t[aux].lista[t[aux].operacoes].saida = valor + (0.05 * valor);
+                    t[aux].lista[t[aux].operacoes].juros = 0.05 * valor;
+                    t[aux].operacoes++;
+                    limpa_buffer();
+
+                } else if (t[aux].tipo_conta == 2 && t[aux].valor_inicial - valor - (0.03 * valor) < -5000) {
+                    printf("Sua conta nao possui saldo suficiente para realizar esse debito.\n\n");
+                    limpa_buffer();
+
+                } else if (t[aux].tipo_conta == 2 && t[aux].valor_inicial - valor - (0.03 * valor) > -5000) {
+                    t[aux].valor_inicial = t[aux].valor_inicial - valor - (0.03 * valor);
+                    printf("Valor debitado com sucesso!\n\n");
+                    t[aux].lista[t[aux].operacoes].tipo = 1;
+                    t[aux].lista[t[aux].operacoes].cpf_origem = t[aux].cpf;
+                    t[aux].lista[t[aux].operacoes].saida = valor + (0.03 * valor);
+                    t[aux].lista[t[aux].operacoes].juros = 0.03 * valor;
+                    t[aux].operacoes++;
+                    limpa_buffer();
+                }
+            } else {
+                printf("Senha invalida!\n\n");
+                limpa_buffer();
+            }
+        }
+    }
+}
+
+
