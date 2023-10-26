@@ -26,6 +26,8 @@ void listar_contas(int cont, struct contas *t);
 
 void debitar(int cont, struct contas *t);
 
+void deposito(int cont, struct contas *t);
+
 
 
 #endif //UNTITLED19_BIBLIOTECA_H
