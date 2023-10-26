@@ -6,7 +6,7 @@
 int main(void) {
   struct contas t[1000];
   int cont = 0;
-  int posicao = 0;
+  le_binario(t, &cont);
 
   while (1) {
     printf("Menu de opcoes\n\n");
@@ -47,7 +47,7 @@ int main(void) {
             listar_contas(cont, t);
         }
       
-     else if (opcao == 4) {
+    else if (opcao == 4) {
             printf("\nVoce entrou na funcao de realizar debitos.\n");
             debitar(cont,t);
         }
@@ -57,7 +57,7 @@ int main(void) {
             deposito(cont,t);
         }
 
-      else if (opcao == 6) {
+    else if (opcao == 6) {
             printf("\nVoce entrou na funcao de mostrar extrato.\n");
             extrato_funcao(cont,t);
         }
@@ -65,6 +65,15 @@ int main(void) {
     else if (opcao == 7) {
             printf("\nVoce entrou na funcao de realizar transferencias.\n");
             transferencia(cont, t);
+        }
+
+    else if (opcao == 8) {
+            printf("\nSaindo do programa");
+            escreve_binario(t, cont);
+            break;
+        }
+    else if (opcao > 8 || p == s_opcao || *p != '\n' || opcao < 1) {
+            printf("Input invalido. Entre somente com valores inteiros entre 1 e 8.\n\n");
         }
     
   }
