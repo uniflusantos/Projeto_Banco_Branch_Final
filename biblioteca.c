@@ -186,4 +186,38 @@ void debitar(int cont, struct contas *t) {
     }
 }
 
+void deposito(int cont, struct contas *t ){
+    long cpf;
+    int aux;
+    if(cont == 0){
+        printf("Nao existem contas cadastradas ainda.\n");
+    }
+    else {
+
+        printf("Entre com o CPF que voce deseja debitar um saldo: ");
+        scanf("%ld", &cpf);
+        printf("\n");
+        aux = buscar_cpf(cpf, t, cont);
+        //printf(" posicao: %d\n",aux); (debug)
+        if (aux == -1) {
+            printf("CPF nao registrado.\n\n");
+            limpa_buffer();
+        } else {
+            double valor;
+            printf("Digite o valor que voce deseja depositar: ");
+            scanf("%lf", &valor);
+            //printf("posicao: %d\n", aux); (debug)
+            t[aux].valor_inicial = t[aux].valor_inicial + valor;
+            t[aux].lista[t[aux].operacoes].tipo = 2;
+            t[aux].lista[t[aux].operacoes].cpf_destino = t[aux].cpf;
+            t[aux].lista[t[aux].operacoes].entrada = valor;
+            t[aux].operacoes++;
+
+
+            printf("Valor depositado com sucesso!\n\n");
+            limpa_buffer();
+        }
+    }
+}
+
 
