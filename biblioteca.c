@@ -220,4 +220,82 @@ void deposito(int cont, struct contas *t ){
     }
 }
 
+int transferencia(int cont, struct contas *t) {
+    long cpf;
+    int valor;
+    int aux;
+    int aux2;
+    if(cont < 1){
+        printf("Nao existem contas o suficiente para transferir.\n");
+        return 1;
+    }
+    else {
+
+
+        printf("Entre o CPF de origem que fara a transferencia: ");
+
+        scanf("%ld", &cpf);
+        printf("\n");
+        aux = buscar_cpf(cpf, t, cont);
+        if (aux == -1) {
+            printf("CPF nao registrado.\n\n");
+            limpa_buffer();
+            return 1;
+        } else {
+            char senha_[200];
+            printf("Digite a senha: ");
+            scanf("%s", senha_);
+            int r = strcmp(senha_, t[aux].senha);
+            if (r != 0) {
+                printf("Senha Invalida.\n\n");
+                limpa_buffer();
+                return 1;
+            }
+            printf("Digite o CPF da conta de destino: ");
+            scanf("%ld", &cpf);
+            aux2 = buscar_cpf(cpf, t, cont);
+            if (aux2 == -1) {
+                printf("CPF nao registrado.\n\n");
+                limpa_buffer();
+                return 1;
+            }
+            printf("Digite o valor que deseja transferir: ");
+            scanf("%d", &valor);
+            if (t[aux].tipo_conta == 1 && t[aux].valor_inicial - valor - (0.05 * valor) < -1000) {
+                printf("Sua conta nao possui saldo suficiente para realizar esse debito.\n\n");
+                limpa_buffer();
+                return 1;
+            } else if (t[aux].tipo_conta == 1 && t[aux].valor_inicial - valor - (0.05 * valor) > -1000) {
+                t[aux].valor_inicial = t[aux].valor_inicial - valor - (0.05 * valor);
+                t[aux].lista[t[aux].operacoes].tipo = 3;
+                t[aux].lista[t[aux].operacoes].cpf_origem = t[aux].cpf;
+                t[aux].lista[t[aux].operacoes].cpf_destino = t[aux2].cpf;
+                t[aux].lista[t[aux].operacoes].saida = valor + (0.05 * valor);
+                t[aux].lista[t[aux].operacoes].juros = 0.05 * valor;
+                t[aux].operacoes++;
+            } else if (t[aux].tipo_conta == 2 && t[aux].valor_inicial - valor - (0.03 * valor) < -5000) {
+                printf("Sua conta nao possui saldo suficiente para realizar esse debito.\n\n");
+                limpa_buffer();
+                return 1;
+            } else if (t[aux].tipo_conta == 2 && t[aux].valor_inicial - valor - (0.03 * valor) > -5000) {
+                t[aux].valor_inicial = t[aux].valor_inicial - valor - (0.03 * valor);
+                t[aux].lista[t[aux].operacoes].tipo = 3;
+                t[aux].lista[t[aux].operacoes].cpf_origem = t[aux].cpf;
+                t[aux].lista[t[aux].operacoes].cpf_destino = t[aux2].cpf;
+                t[aux].lista[t[aux].operacoes].saida = valor + (0.03 * valor);
+                t[aux].lista[t[aux].operacoes].juros = 0.03 * valor;
+                t[aux].operacoes++;
+            }
+            t[aux2].valor_inicial = t[aux2].valor_inicial + valor;
+            t[aux2].lista[t[aux2].operacoes].tipo = 4;
+            t[aux2].lista[t[aux2].operacoes].cpf_origem = t[aux].cpf;
+            t[aux2].lista[t[aux2].operacoes].cpf_destino = t[aux2].cpf;
+            t[aux2].lista[t[aux2].operacoes].entrada = valor;
+            t[aux2].operacoes++;
+            limpa_buffer();
+            printf("Transferencia realizada com sucesso!\n\n");
+            return 0;
+        }
+    }
+}
 
