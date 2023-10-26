@@ -35,4 +35,12 @@ int main(void) {
             printf("Conta cadastrada com sucesso!\n");
         }
   }
+
+  else if (opcao == 2) {
+            printf("\nVoce entrou na funcao de deletar contas.\n");
+            int verifica = deletar(cont,t);
+            if(verifica == 0){
+                cont--;
+            }
+        }
 }
