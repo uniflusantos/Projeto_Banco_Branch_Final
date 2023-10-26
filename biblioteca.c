@@ -299,3 +299,75 @@ int transferencia(int cont, struct contas *t) {
     }
 }
 
+void extrato_funcao(int cont, struct contas *t){
+
+    long cpf;
+
+    if(cont == 0){
+        printf("Nao existem contas cadastradas ainda.\n");
+        //limpa_buffer();
+    }
+    else {
+        int verifica;
+        printf("Entre com o CPF que voce deseja ver o extrato: \n");
+        scanf("%ld", &cpf);
+        printf("\n");
+        verifica = buscar_cpf(cpf, t, cont);
+        if (verifica == -1) {
+            printf("CPF nao registrado. \n");
+            //limpa_buffer();
+        } else {
+            char senha_[200];
+            printf("Digite a senha: ");
+            scanf("%s", senha_);
+            int r = strcmp(senha_, t[verifica].senha);
+            if (r == 0) {
+                FILE *f = fopen("extrato.txt", "wb");
+                fprintf(f, "\nExtrato aqui: \n\n");
+                for(int i = 0 ; i < t[verifica].operacoes;i++){
+                    if(t[verifica].lista[i].tipo ==  2){
+                        fprintf(f, "Valor depositado: %.2lf\n",t[verifica].lista[i].entrada);
+                        fprintf(f, "CPF de destino: %ld\n \n \n",t[verifica].lista[i].cpf_destino);
+
+
+                    }
+                    else if (t[verifica].lista[i].tipo ==  1){
+                        fprintf(f, "Valor debitado: %.2lf\n",t[verifica].lista[i].saida - t[verifica].lista[i].juros);
+                        fprintf(f, "CPF de origem: %ld\n",t[verifica].lista[i].cpf_origem);
+                        fprintf(f, "Juros: %.2lf\n \n \n", t[verifica].lista[i].juros);
+
+                    }
+                    else if(t[verifica].lista[i].tipo ==  3){
+
+                        fprintf(f, "Valor transferido: %.2lf\n",t[verifica].lista[i].saida-t[verifica].lista[i].juros);
+                        fprintf(f, "da conta do CPF : %ld\n",t[verifica].lista[i].cpf_origem);
+                        fprintf(f, "para a conta do  CPF : %ld\n",t[verifica].lista[i].cpf_destino);
+                        fprintf(f, "Juros: %.2lf\n \n \n", t[verifica].lista[i].juros);
+
+                    }
+
+                    else if(t[verifica].lista[i].tipo ==  4){
+
+                        fprintf(f,"Valor recebido: %.2lf\n",t[verifica].lista[i].entrada);
+                        fprintf(f,"da conta do CPF : %ld\n",t[verifica].lista[i].cpf_origem);
+                        fprintf(f,"para a conta do  CPF : %ld\n \n \n",t[verifica].lista[i].cpf_destino);
+
+
+                    }
+                }
+                fclose(f);
+
+            }
+            else {
+                printf("Senha invalida!\n");
+                //limpa_buffer();
+            }
+
+        }
+        limpa_buffer();
+    }
+}
+
+
+
+
