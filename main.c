@@ -41,6 +41,10 @@ int main(void) {
                 cont--;
             }
         }
+    else if (opcao == 3) {
+            printf("\nVoce entrou na funcao de listar clientes.\n\n");
+            listar_contas(cont, t);
+        }
     
   }
   
