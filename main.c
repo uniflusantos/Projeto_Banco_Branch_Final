@@ -51,6 +51,11 @@ int main(void) {
             printf("\nVoce entrou na funcao de realizar debitos.\n");
             debitar(cont,t);
         }
+
+    else if (opcao == 5) {
+            printf("\nVoce entrou na funcao de realizar depositos.\n");
+            deposito(cont,t);
+        }
     
   }
   
