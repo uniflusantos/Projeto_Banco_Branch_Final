@@ -56,6 +56,11 @@ int main(void) {
             printf("\nVoce entrou na funcao de realizar depositos.\n");
             deposito(cont,t);
         }
+
+    else if (opcao == 7) {
+            printf("\nVoce entrou na funcao de realizar transferencias.\n");
+            transferencia(cont, t);
+        }
     
   }
   
