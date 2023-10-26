@@ -101,3 +101,24 @@ int deletar(int cont, struct contas *t) {
         return 0;
     }
 }
+
+void listar_contas(int cont, struct contas *t){
+    if(cont ==0){
+        printf("Nao existem contas cadastradas ainda.\n");
+    }
+    else {
+        printf("Lista de Contas: \n\n");
+        for (int x = 0; x < cont; x++) {
+            printf("Conta %d\n", x + 1);
+            printf("Nome: %s\n", t[x].nome);
+            printf("CPF: %ld\n", t[x].cpf);
+            if (t[x].tipo_conta == 1) {
+                printf("Tipo de conta: Comum\n");
+            } else if (t[x].tipo_conta == 2) {
+                printf("Tipo de conta: Plus\n");
+            }
+            printf("Valor inicial: %.2lf\n", t[x].valor_inicial);
+            printf("Senha: %s\n\n", t[x].senha);
+        }
+    }
+}
