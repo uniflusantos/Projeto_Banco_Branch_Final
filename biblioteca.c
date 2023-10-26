@@ -68,3 +68,36 @@ void le_informacoes(struct contas *armazena, int cont){
     armazena[cont].operacoes = 0;
 
 }
+
+
+int deletar(int cont, struct contas *t) {
+    //printf("Entre com o CPF que vpcê deseja deletar: "); (debug)
+    //scanf("%ld", &cpf); (debug)
+    //buscar_cpf(cpf_recebido, armazena,cont); (debug)
+
+    long cpf;
+
+    if(cont ==0){
+        printf("Nao existem contas cadastradas ainda.\n");
+        return 1;
+    }
+    else {
+        int teste;
+        printf("Entre com o CPF que voce deseja deletar:  \n");
+        scanf("%ld", &cpf);
+        teste = buscar_cpf(cpf, t, cont);
+        //printf("posicao delete: %d\n",teste); (debug)
+        if (teste == -1) {
+            printf("CPF inexistente, tente novamente.\n");
+            limpa_buffer();
+            return 1;
+        }
+
+        for (int i = teste; i < cont; i++) {
+            t[i] = t[i + 1];
+        }
+        printf("Conta deletada !\n");
+        limpa_buffer();
+        return 0;
+    }
+}
