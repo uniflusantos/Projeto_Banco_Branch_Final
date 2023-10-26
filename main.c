@@ -57,6 +57,11 @@ int main(void) {
             deposito(cont,t);
         }
 
+      else if (opcao == 6) {
+            printf("\nVoce entrou na funcao de mostrar extrato.\n");
+            extrato_funcao(cont,t);
+        }
+
     else if (opcao == 7) {
             printf("\nVoce entrou na funcao de realizar transferencias.\n");
             transferencia(cont, t);
