@@ -30,7 +30,6 @@ void le_informacoes(struct contas *armazena, int cont){
     long cpf_recebido;
     int teste;
     int teste_conta;
-    if(cont>=0){
         do{
             printf("Digite seu CPF: \n");
             scanf("%ld", &cpf_recebido);
@@ -39,8 +38,7 @@ void le_informacoes(struct contas *armazena, int cont){
                 printf("CPF invalido, tente novamente.\n");
             }
         }while(teste > -1);
-    };
-
+    
     armazena[cont].cpf = cpf_recebido;
 
     limpa_buffer();
