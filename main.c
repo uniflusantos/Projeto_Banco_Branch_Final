@@ -24,5 +24,15 @@ int main(void) {
     int opcao;
     fgets(s_opcao, 100, stdin);
     opcao = strtol(s_opcao, &p, 10);
+
+    if (opcao == 1) {
+            //printf("\nVoce entrou na funcao de criar contas.\n\n");
+
+            le_informacoes(t, cont);
+            //buscar_cpf(t[cont].cpf,t,cont);
+            cont++;
+
+            printf("Conta cadastrada com sucesso!\n");
+        }
   }
 }
