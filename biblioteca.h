@@ -22,7 +22,6 @@ void le_informacoes(struct contas *armazena, int cont);
 
 int deletar(int cont, struct contas *t);
 
-void listar_contas(int cont, struct contas *t);
 
 
 #endif //UNTITLED19_BIBLIOTECA_H
