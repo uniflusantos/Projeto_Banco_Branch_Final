@@ -154,7 +154,7 @@ void debitar(int cont, struct contas *t) {
                     printf("Sua conta nao possui saldo suficiente para realizar esse debito.\n\n");
                     limpa_buffer();
                 }
-                else if (t[aux].tipo_conta == 1 && t[aux].valor_inicial - valor - (0.05 * valor) > -1000) {
+                else if (t[aux].tipo_conta == 1 && t[aux].valor_inicial - valor - (0.05 * valor) >= -1000) {
                     t[aux].valor_inicial = t[aux].valor_inicial - valor - (0.05 * valor);
                     printf("Valor debitado com sucesso!\n\n");
                     t[aux].lista[t[aux].operacoes].tipo = 1;
@@ -168,7 +168,7 @@ void debitar(int cont, struct contas *t) {
                     printf("Sua conta nao possui saldo suficiente para realizar esse debito.\n\n");
                     limpa_buffer();
 
-                } else if (t[aux].tipo_conta == 2 && t[aux].valor_inicial - valor - (0.03 * valor) > -5000) {
+                } else if (t[aux].tipo_conta == 2 && t[aux].valor_inicial - valor - (0.03 * valor) >= -5000) {
                     t[aux].valor_inicial = t[aux].valor_inicial - valor - (0.03 * valor);
                     printf("Valor debitado com sucesso!\n\n");
                     t[aux].lista[t[aux].operacoes].tipo = 1;
@@ -265,7 +265,7 @@ int transferencia(int cont, struct contas *t) {
                 printf("Sua conta nao possui saldo suficiente para realizar esse debito.\n\n");
                 limpa_buffer();
                 return 1;
-            } else if (t[aux].tipo_conta == 1 && t[aux].valor_inicial - valor - (0.05 * valor) > -1000) {
+            } else if (t[aux].tipo_conta == 1 && t[aux].valor_inicial - valor - (0.05 * valor) >= -1000) {
                 t[aux].valor_inicial = t[aux].valor_inicial - valor - (0.05 * valor);
                 t[aux].lista[t[aux].operacoes].tipo = 3;
                 t[aux].lista[t[aux].operacoes].cpf_origem = t[aux].cpf;
@@ -277,7 +277,7 @@ int transferencia(int cont, struct contas *t) {
                 printf("Sua conta nao possui saldo suficiente para realizar esse debito.\n\n");
                 limpa_buffer();
                 return 1;
-            } else if (t[aux].tipo_conta == 2 && t[aux].valor_inicial - valor - (0.03 * valor) > -5000) {
+            } else if (t[aux].tipo_conta == 2 && t[aux].valor_inicial - valor - (0.03 * valor) >= -5000) {
                 t[aux].valor_inicial = t[aux].valor_inicial - valor - (0.03 * valor);
                 t[aux].lista[t[aux].operacoes].tipo = 3;
                 t[aux].lista[t[aux].operacoes].cpf_origem = t[aux].cpf;
