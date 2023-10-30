@@ -5,6 +5,17 @@
 #ifndef UNTITLED19_BIBLIOTECA_H
 #define UNTITLED19_BIBLIOTECA_H
 
+typedef struct extrato {
+    long cpf_origem;
+    long cpf_destino;
+    double entrada;
+    double saida;
+    double juros;
+    int tipo;
+
+
+}extrato;
+
 struct contas{
     char nome[100];
     long cpf;
