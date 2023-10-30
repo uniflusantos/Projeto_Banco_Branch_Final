@@ -20,8 +20,10 @@ struct contas{
     char nome[100];
     long cpf;
     int tipo_conta;
-    int valor_inicial;
+    double valor_inicial;
     char senha[100];
+    struct extrato lista[100];
+    int operacoes;
 };
 
 int buscar_cpf(long cpf, struct contas*t, int cont);
